@@ -96,8 +96,8 @@ class NewVisitorTest(LiveServerTestCase):
         # Francis starts a new list by entering a new item. He
         # is less interesting than Edith...
         inputbox = self.browser.find_element_by_id('id_new_item')
-        inputbix.send_keys('Buy milk')
-        inputbix.send_keys(Keys.ENTER)
+        inputbox.send_keys('Buy milk')
+        inputbox.send_keys(Keys.ENTER)
         self.wait_for_row_in_list_table('1: Buy milk')
 
         # Francis gets hiw own unique URL
