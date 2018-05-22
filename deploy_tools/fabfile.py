@@ -1,12 +1,15 @@
 import random
 from fabric.contrib.files import append, exists
-from fabrix.api import cd, env, local, run
+from fabric.api import cd, env, local, run
 
-REPO_URL = 'https://github.com/krossov/tut_testing_goat.git'
+REPO_URL = 'git@github.com:krossov/tut_testing_goat.git'
+
+env.use_ssh_config = True
 
 def deploy():
     site_folder = f'/home/{env.user}/sites/{env.host}'
     run(f'mkdir -p {site_folder}')
+    run(f'cd {site_folder}')
     with cd(site_folder):
         _get_latest_source()
         _update_pipenv()
@@ -36,10 +39,8 @@ def _create_or_update_dotenv():
         append('.env', f'DJANGO_SECRET_KEY={new_secret}')
 
 def _update_static_files():
-    run('pipenv shell')
-    run('python manage.py collectstatic --noinput')
+    run('pipenv run python manage.py collectstatic --noinput')
 
 def _update_database():
-    run('python manage.py migrate --noinput')
-
+    run('pipenv run python manage.py migrate --noinput')
 
