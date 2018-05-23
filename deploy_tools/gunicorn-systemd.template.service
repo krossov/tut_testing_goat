@@ -7,7 +7,7 @@ User=odesm
 WorkingDirectory=/home/odesm/sites/DOMAIN
 EnvironmentFile=/home/odesm/sites/DOMAIN/.env
 
-ExecStart=/home/elspeth/sites/DOMAIN/virtualenv/bin/gunicorn \
+ExecStart=pipenv run gunicorn \
     --bind unix:/tmp/DOMAIN.socket \
     superlists.wsgi:application
 
