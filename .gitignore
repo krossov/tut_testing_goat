@@ -3,3 +3,5 @@ geckodriver.log
 Pipfile.lock
 /static
 .env
+**/__pycache__/*
+.idea
