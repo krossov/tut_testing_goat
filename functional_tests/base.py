@@ -15,7 +15,11 @@ class FunctionalTest(StaticLiveServerTestCase):
 
     def setUp(self):
         #self.browser = webdriver.Firefox()
-        self.browser = webdriver.Chrome()
+        options = webdriver.ChromeOptions()
+        options.add_argument('--ignore-certificate-error')
+        options.add_argument('--test-type')
+        options.binary_location = '/usr/bin/chromium-browser'
+        self.browser = webdriver.Chrome(chrome_options=options)
         staging_server = os.environ.get('STAGING_SERVER')
         if staging_server:
             self.live_server_url = 'http://' + staging_server
